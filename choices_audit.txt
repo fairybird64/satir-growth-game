@@ -1,0 +1,50 @@
+Line 2897: 2 choices
+ext;
+  sc.inner          = v.inner;
+  sc.emotions       = v.emotions;
+  sc.depathologize  = v.depathologize;
+  sc.copingHint     = v.copingHint;
+  sc.choices = [
+    { text: v.choiceA, type: 'good' },
+    { text: v.choiceB, type: 'ok' },
+  ];
+  sc.outcomes = {
+    good: { type: 'good', title: v.outc
+---
+Line 2921: 2 choices
+ดภัยตรงนี้ ไม่ต้องการอะไรเพิ่มเลย...',
+   emotions:['proud'],
+   depathologize:'ความรู้สึกปลอดภัยและคาดเดาได้คือความต้องการพื้นฐานของมนุษย์ทุกคน',
+   choices:[
+     {text:'เดินทักทายเพื่อนๆ ก่อนเข้าชั้นเรียน',type:'good'},
+     {text:'นั่งเฉยๆ รอวันผ่านไปเรื่อยๆ',type:'ok'},
+   ],
+   outcomes:{
+    
+---
+Line 3144: 2 choices
+ุ" → "หยุดนิ่ง" → "สื่อสารตรงๆ" — สิ่งสำคัญที่เธอเรียนรู้คือ พ่อแม่ก็คือคนธรรมดาที่มีวิธีรับมือของตัวเอง และนั่นไม่ใช่ความรับผิดชอบของมินนา',
+        choices:[
+          {text:'เขียนบันทึกว่า "วันนี้ฉันดูแลตัวเองได้ดีขึ้นแล้ว" แล้ววางไว้ข้างหมอน',type:'good'},
+          {text:'โทรบอกเพื่อนเก่าว่าตอน
+---
+Line 3324: 2 choices
+copingHint:'มินนากำลังฝึก **การแยกความเมตตากรุณาออกจากการพัวพัน (Enmeshing)** — เธอสามารถเป็นห่วงคนอื่นโดยไม่ต้องรับผิดชอบทางเลือกของพวกเขา',
+        choices:[
+          {text:'บอกเพื่อนกลุ่มนั้นตรงๆ ด้วยความห่วงใย ว่าเป็นห่วงพวกเขาและบอกว่ามีครูแนะแนวให้คุยได้',type:'good'},
+          {text:'ห่างจา
+---
+Line 3502: 2 choices
+ีวิตประจำวัน',
+        copingHint:'มินนาเดินทางจาก **ผู้ยืนดู → ผู้รับรู้ → ผู้กล้าลุกขึ้น** แต่ละก้าวเล็กน้อย แต่รวมกันสร้างความแตกต่างได้',
+        choices:[
+          {text:'ตอบน้องปลาว่า \"ฉันก็ดีใจที่ได้รู้จักปลานะ ถ้าต้องการอะไรบอกได้เสมอ\"',type:'good'},
+          {text:'ชวนน้องปลาไปทำกิจกรรม
+---
+Line 4509: 2 choices
+= ov.inner;
+    SCENES[0].emotions = ov.emotions; SCENES[0].depathologize = ov.depathologize;
+    SCENES[0].copingHint = ov.copingHint;
+    SCENES[0].choices = [{text:ov.choiceA,type:'good'},{text:ov.choiceB,type:'ok'}];
+    SCENES[0].outcomes = {good:{type:'good',title:ov.outcomeGood.title,text:ov.
+---
