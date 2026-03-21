@@ -4281,7 +4281,7 @@ function showEnd(){
   const g=Math.min(10,Math.round(scoreGrowth/(n*2)*10));
   const c=Math.min(10,Math.round(scoreCourage/(n*2)*10));
   const h=Math.min(10,Math.round(scoreHeart/(n*2)*10));
-  const d=Math.min(10,tuningCount*2+1);
+  const d=Math.min(10,Math.round((tuningCount/Math.max(n,1))*10));
   // Save session before rendering
   saveSession(g, c, h, d);
   const sessions = getSessionHistory();
