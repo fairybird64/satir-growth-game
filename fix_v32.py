@@ -28,16 +28,26 @@ if old1 in c:
     print("✅ Fix 1: single-session line guard")
 else:
     print("⚠️ Fix 1 not found")
-# Fix 2: Depth normalization — แก้ทุกที่ที่ใช้ tuningCount*2+1
+# Fix 2: Depth normalization — แก้ทุกที่ที่ใช้ tuningCount*2+1 (both spacing variants)
 import re
-old2 = "const d = Math.min(10, tuningCount*2+1);"
-new2 = "const d = Math.min(10, Math.round((tuningCount / Math.max(n, 1)) * 10));"
-count2 = c.count(old2)
-if count2:
-    c = c.replace(old2, new2)
-    print(f"✅ Fix 2: depth normalization ({count2}x)")
+# showFinalScore() uses spaces: "const d = Math.min(10, tuningCount*2+1);"
+old2a = "const d = Math.min(10, tuningCount*2+1);"
+new2a = "const d = Math.min(10, Math.round((tuningCount / Math.max(n, 1)) * 10));"
+count2a = c.count(old2a)
+if count2a:
+    c = c.replace(old2a, new2a)
+    print(f"✅ Fix 2a: depth normalization showFinalScore ({count2a}x)")
 else:
-    print("⚠️ Fix 2 not found")
+    print("⚠️ Fix 2a not found")
+# showEnd() uses no spaces: "const d=Math.min(10,tuningCount*2+1);"
+old2b = "const d=Math.min(10,tuningCount*2+1);"
+new2b = "const d=Math.min(10,Math.round((tuningCount/Math.max(n,1))*10));"
+count2b = c.count(old2b)
+if count2b:
+    c = c.replace(old2b, new2b)
+    print(f"✅ Fix 2b: depth normalization showEnd ({count2b}x)")
+else:
+    print("⚠️ Fix 2b not found")
 with open('satir-growth-game-v32.html', 'w', encoding='utf-8') as f:
     f.write(c)
 print(f"DONE: {len(c):,} bytes")
