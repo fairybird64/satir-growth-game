@@ -4348,25 +4348,12 @@ function showEnd(){
           <button class="btn-next" onclick="startSelfAssess()" style="margin:0 auto;display:block">เริ่มสะท้อนตัวเอง 🌿</button>
         </div>
       </div>
-      <div class="feedback-section">
-        <h3>📝 ช่วยบอกเราได้ไหม? (สำหรับทีม)</h3>
-        <div class="fb-q"><label>1. เกมนี้เข้าใจง่ายแค่ไหน?</label>
-          <div class="star-row" id="stars0">${[1,2,3,4,5].map(n=>`<button class="star-btn" onclick="rateStar(0,${n})">⭐</button>`).join('')}</div></div>
-        <div class="fb-q"><label>2. เนื้อหาเกี่ยวข้องกับชีวิตจริงแค่ไหน?</label>
-          <div class="star-row" id="stars1">${[1,2,3,4,5].map(n=>`<button class="star-btn" onclick="rateStar(1,${n})">⭐</button>`).join('')}</div></div>
-        <div class="fb-q"><label>3. อยากเล่นอีกหรืออยากแนะนำเพื่อน?</label>
-          <div class="star-row" id="stars2">${[1,2,3,4,5].map(n=>`<button class="star-btn" onclick="rateStar(2,${n})">⭐</button>`).join('')}</div></div>
-        <div class="fb-q"><label>4. มีอะไรอยากบอกทีมผู้สร้างบ้าง?</label>
-          <textarea class="fb-text" id="fbText" placeholder="เช่น ชอบตรงไหน อยากเพิ่มอะไร หรือรู้สึกยังไงหลังเล่น..."></textarea></div>
-        <button class="btn-submit" onclick="submitFeedback()">ส่ง Feedback 💚</button>
-        <div class="fb-sent" id="fbSent">ขอบคุณมากเลย! Feedback ของคุณมีคุณค่ามากสำหรับทีม 🌱</div>
-      </div>
       <div class="btn-row">
         <button class="btn-restart" onclick="restartGame()">🔄 เล่นอีกครั้ง</button>
         <button class="btn-explore" onclick="switchMode('bonus')">📖 เรื่องอื่นๆ</button>
         <button class="btn-explore" onclick="switchMode('iceberg')">🌊 สำรวจข้างใน</button>
         <button class="btn-explore purple" onclick="switchMode('coping')">🛡️ ดูวิธีรับมือ</button>
-        <button class="btn-explore" style="background:rgba(90,138,90,0.12);border-color:rgba(90,138,90,0.35);color:var(--green2)" onclick="openResultForm()">📋 ดูผลการเดินทาง</button>
+        <button class="btn-explore" style="background:rgba(90,138,90,0.12);border-color:rgba(90,138,90,0.35);color:var(--green2)" onclick="openResultForm()">📝 ส่ง Feedback ให้ทีม</button>
       </div>
     </div>`;
   window.scrollTo({top:0,behavior:'smooth'});
