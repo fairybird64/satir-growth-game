@@ -325,6 +325,13 @@ body {
   font-size: 0.84rem; color: #7060a0; line-height: 1.7;
 }
 .coping-hint::before { content:'🛡️ '; }
+.insight-box {
+  background: linear-gradient(135deg, rgba(180,140,220,0.12), rgba(210,170,240,0.1));
+  border: 1.5px solid rgba(150,100,200,0.35);
+  border-radius: 12px; padding: 11px 15px; margin: 12px 0;
+  font-size: 0.84rem; color: #6a4a9a; line-height: 1.7;
+}
+.insight-box::before { content:'🛡️ '; }
 .chooser-box {
   background: linear-gradient(135deg, rgba(212,137,42,0.1), rgba(240,168,64,0.12));
   border: 1.5px solid rgba(212,137,42,0.3);
@@ -1353,7 +1360,7 @@ const NARRATIVE_TRACKS = {
         text: 'หลังจากพ่อบอกเรื่องย้าย มินนานั่งเฉยอยู่บนเตียง ไม่โกรธ ไม่ร้องไห้ แค่รู้สึกว่าพลังงานทุกอย่างหายออกจากร่างกาย เหมือนแบตเตอรี่ที่ถูกดูดหมดใน 5 วินาที',
         inner: 'ทำไมฉันถึงไม่รู้สึกอะไรเลย ฉันควรจะโกรธหรือร้องไห้ แต่แค่รู้สึกว่าหมดแรงมาก...',
         depathologize: 'ความเหนื่อยล้าทันทีหลังข่าวร้ายไม่ใช่ความไม่แยแส — เป็นการตอบสนองของระบบประสาทที่ต้องการเวลาประมวลผล พลังงานกำลังถูกใช้ภายใน',
-        copingHint: 'พลังงานจิตใจใช้แคลอรี่จริงๆ — ข่าวใหญ่สามารถดูดพลังงานออกไปในพริบตาโดยไม่มีสัญญาณเตือน',
+        copingHint: 'ความชาหลังข่าวใหญ่เป็นเรื่องปกติมาก — ร่างกายกำลังใช้พลังงานทั้งหมดประมวลผลสิ่งที่เพิ่งได้ยิน ไม่ใช่สัญญาณของความผิดปกติ',
         bodySignal: 'ร่างกายนิ่งราบบนเตียง · แขนขาหนักเหมือนมีน้ำหนักกดทับ · หายใจตื้นและช้า · ตาเปิดแต่มองไม่เห็นอะไร',
         bodyNote: 'ร่างกายที่แข็งทื่อหลังข่าวร้ายคือระบบประสาทที่กำลังประมวลผลข้อมูลใหญ่ ไม่ใช่ความไม่แยแส',
         choices: [
@@ -1390,7 +1397,7 @@ const NARRATIVE_TRACKS = {
         text: 'ระหว่างเดินในโรงเรียนใหม่ มินนารู้สึกว่าขาหนักมาก หยุดยืนอยู่กลางทางเดิน คนเดิน รอบตัวแต่เธอรู้สึกว่าตัวเองกำลังจะล้มลง ทั้งที่ไม่ได้ป่วยอะไร',
         inner: 'ฉันเป็นอะไร ทำไมเดินแค่นี้ก็เหนื่อย ฉันต้องการอะไร? ฉันไม่รู้ว่าต้องการอะไรด้วยซ้ำ...',
         depathologize: 'ร่างกายที่หมดแรงกลางทางกำลังส่งสัญญาณที่ชัดเจนมาก — นั่นไม่ใช่ความอ่อนแอ แต่คือสัญญาณที่ต้องฟัง',
-        bodySignal: 'ขาหนักจนหยุดเดิน · ศีรษะหมุนเล็กน้อย · มือจับกระเป๋าแน่นเพื่อทรงตัว · หายใจเร็วขึ้นทั้งที่ไม่ได้วิ่ง',
+        bodySignal: 'ก้าวขาไม่ออก · มึนงงหน้ามืด · มือกำแน่นหาที่ยึด · หายใจถี่รัว',
         bodyNote: 'ร่างกายที่หยุดกลางทางกำลังบอกว่าถึงขีดจำกัดแล้ว ต้องฟัง ไม่ใช่บีบต่อ',
         choices: [
           {text:'บีบตัวเองเดินต่อ ไม่อยากให้ใครเห็นว่าหยุด', type:'stuck'},
@@ -1408,7 +1415,7 @@ const NARRATIVE_TRACKS = {
         text: 'มินนานั่งพักในห้องน้ำ น้ำตาไหลออกมาเอง แล้วก็โกรธตัวเองที่ร้องไห้เพราะเรื่องแค่นี้ รู้สึกว่าตัวเองอ่อนแอ แต่พอจะลุกขึ้นก็รู้สึกหมดแรงอีก',
         inner: 'ฉันหมดแรงจนร้องไห้ แล้วก็หมดแรงจนโกรธตัวเองได้ด้วย มันเหนื่อยมากจริงๆ...',
         depathologize: 'การโกรธตัวเองที่หมดแรงคือการเพิ่มน้ำหนักให้ตัวเองโดยไม่จำเป็น — ร่างกายที่เหนื่อยไม่ต้องการคำตัดสิน แต่ต้องการการดูแล',
-        bodySignal: 'น้ำตาไหลเอง · ร่างกายเหนื่อยแต่ยังตึงอยู่ · มือกำหรือกอดตัวเอง · หัวก้มลงตามน้ำหนักความเหนื่อย',
+        bodySignal: 'น้ำตาคลอเบ้า · ร่างกายอ่อนเพลีย · กอดตัวเองปลอบใจ · คอตกก้มหน้า',
         bodyNote: 'ร่างกายที่ร้องไห้เพราะหมดแรงกำลังพยายามปล่อยความตึงออก ไม่ใช่ความอ่อนแอ',
         choices: [
           {text:'โกรธตัวเองที่ร้องไห้ บังคับตัวเองลุกทั้งที่ยังหมดแรง', type:'stuck'},
@@ -2807,6 +2814,7 @@ function _buildScenesSnapshot() {
     inner:        sc.inner,
     depathologize: sc.depathologize,
     copingHint:   sc.copingHint || null,
+    insightBox:   sc.insightBox || null,
     choices:      JSON.parse(JSON.stringify(sc.choices || [])),
     outcomes:     JSON.parse(JSON.stringify(sc.outcomes || {})),
     bodySignal:   BODY_SIGNALS && BODY_SIGNALS.main && BODY_SIGNALS.main[i] ? BODY_SIGNALS.main[i].signal : null,
@@ -3722,7 +3730,7 @@ function renderScene(){
   renderStageBar(); renderEmotions(sc.emotions);
   const depathHtml=sc.depathologize?`<div class="depathologize">${sc.depathologize}</div>`:'';
   const copingHtml=sc.copingHint?`<div class="coping-hint">${sc.copingHint}</div>`:'';
-  const insightHtml=sc.insightBox?`<div class="coping-hint">${sc.insightBox}</div>`:'';
+  const insightHtml=sc.insightBox?`<div class="insight-box">${sc.insightBox}</div>`:'';
   const chooserHtml=sc.chooserNote?`<div class="chooser-box">${sc.chooserNote}</div>`:'';
   document.getElementById('mainArea').innerHTML=`
     <div class="stage-badge">${STAGES[sc.stage].icon} ระยะที่ ${sc.stage+1}: ${STAGES[sc.stage].label}${currentScene===0 && activeOpeningVariant ? ` <span style="font-size:0.72rem;opacity:0.75;font-weight:400;margin-left:6px">${activeOpeningVariant.badge}</span>` : ''}${activeTrack && currentScene>0 ? ` <span style="font-size:0.72rem;opacity:0.7;font-weight:400;margin-left:6px">${activeTrack.label}</span>` : ''}</div>
@@ -3923,7 +3931,7 @@ function renderBonusScene(){
   renderEmotions(sc.emotions);
   const depathHtml=sc.depathologize?`<div class="depathologize">${sc.depathologize}</div>`:'';
   const copingHtml=sc.copingHint?`<div class="coping-hint">${sc.copingHint}</div>`:'';
-  const insightHtml=sc.insightBox?`<div class="coping-hint">${sc.insightBox}</div>`:'';
+  const insightHtml=sc.insightBox?`<div class="insight-box">${sc.insightBox}</div>`:'';
   const chooserHtml=sc.chooserNote?`<div class="chooser-box">${sc.chooserNote}</div>`:'';
   document.getElementById('mainArea').innerHTML=`
     <button class="bonus-back" onclick="bonusMode=null;renderBonus()">← ${story.icon} ${story.title}</button>
@@ -4340,25 +4348,12 @@ function showEnd(){
           <button class="btn-next" onclick="startSelfAssess()" style="margin:0 auto;display:block">เริ่มสะท้อนตัวเอง 🌿</button>
         </div>
       </div>
-      <div class="feedback-section">
-        <h3>📝 ช่วยบอกเราได้ไหม? (สำหรับทีม)</h3>
-        <div class="fb-q"><label>1. เกมนี้เข้าใจง่ายแค่ไหน?</label>
-          <div class="star-row" id="stars0">${[1,2,3,4,5].map(n=>`<button class="star-btn" onclick="rateStar(0,${n})">⭐</button>`).join('')}</div></div>
-        <div class="fb-q"><label>2. เนื้อหาเกี่ยวข้องกับชีวิตจริงแค่ไหน?</label>
-          <div class="star-row" id="stars1">${[1,2,3,4,5].map(n=>`<button class="star-btn" onclick="rateStar(1,${n})">⭐</button>`).join('')}</div></div>
-        <div class="fb-q"><label>3. อยากเล่นอีกหรืออยากแนะนำเพื่อน?</label>
-          <div class="star-row" id="stars2">${[1,2,3,4,5].map(n=>`<button class="star-btn" onclick="rateStar(2,${n})">⭐</button>`).join('')}</div></div>
-        <div class="fb-q"><label>4. มีอะไรอยากบอกทีมผู้สร้างบ้าง?</label>
-          <textarea class="fb-text" id="fbText" placeholder="เช่น ชอบตรงไหน อยากเพิ่มอะไร หรือรู้สึกยังไงหลังเล่น..."></textarea></div>
-        <button class="btn-submit" onclick="submitFeedback()">ส่ง Feedback 💚</button>
-        <div class="fb-sent" id="fbSent">ขอบคุณมากเลย! Feedback ของคุณมีคุณค่ามากสำหรับทีม 🌱</div>
-      </div>
       <div class="btn-row">
         <button class="btn-restart" onclick="restartGame()">🔄 เล่นอีกครั้ง</button>
         <button class="btn-explore" onclick="switchMode('bonus')">📖 เรื่องอื่นๆ</button>
         <button class="btn-explore" onclick="switchMode('iceberg')">🌊 สำรวจข้างใน</button>
         <button class="btn-explore purple" onclick="switchMode('coping')">🛡️ ดูวิธีรับมือ</button>
-        <button class="btn-explore" style="background:rgba(90,138,90,0.12);border-color:rgba(90,138,90,0.35);color:var(--green2)" onclick="openResultForm()">📋 ดูผลการเดินทาง</button>
+        <button class="btn-explore" style="background:rgba(90,138,90,0.12);border-color:rgba(90,138,90,0.35);color:var(--green2)" onclick="openResultForm()">📝 ส่ง Feedback ให้ทีม</button>
       </div>
     </div>`;
   window.scrollTo({top:0,behavior:'smooth'});
