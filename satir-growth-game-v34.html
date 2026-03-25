@@ -3800,8 +3800,6 @@ function renderScene(){
   renderStageBar(); renderEmotions(sc.emotions);
   const depathHtml=sc.depathologize?`<div class="depathologize">${sc.depathologize}</div>`:'';
   const copingHtml=sc.copingHint?`<div class="coping-hint">${sc.copingHint}</div>`:'';
-  const insightHtml=sc.insightBox?`<div class="insight-box">${sc.insightBox}</div>`:'';
-  const chooserHtml=sc.chooserNote?`<div class="chooser-box">${sc.chooserNote}</div>`:'';
   document.getElementById('mainArea').innerHTML=`
     <div class="stage-badge">${STAGES[sc.stage].icon} ระยะที่ ${sc.stage+1}: ${STAGES[sc.stage].label}${currentScene===0 && activeOpeningVariant ? ` <span style="font-size:0.72rem;opacity:0.75;font-weight:400;margin-left:6px">${activeOpeningVariant.badge}</span>` : ''}${activeTrack && currentScene>0 ? ` <span style="font-size:0.72rem;opacity:0.7;font-weight:400;margin-left:6px">${activeTrack.label}</span>` : ''}</div>
     <div class="scene-card">
@@ -3811,7 +3809,7 @@ function renderScene(){
       </div>
       <p class="scene-text" id="sceneText"></p>
       <div class="inner-voice" id="innerVoice" style="opacity:0">${sc.inner}</div>
-      ${depathHtml}${copingHtml}${insightHtml}${chooserHtml}
+      ${depathHtml}${copingHtml}
       <div id="choiceArea" style="opacity:0;transition:opacity 0.5s">
         <div class="choices-label">มินนาควรทำอะไร?</div>
         ${sc.choices.map((c,i)=>`
@@ -3852,12 +3850,15 @@ function chooseOption(idx){
   else if(isOk){ scoreGrowth+=1; /* courage+0 */ scoreHeart+=1; }
   else { /* stuck/delegate/withdraw/deflect */ scoreCourage+=1; }
   const displayType = outcome.type || (scoreType==='good'?'good':scoreType);
+  const insightAfterHtml=sc.insightBox?`<div class="insight-box">${sc.insightBox}</div>`:'';
+  const chooserAfterHtml=sc.chooserNote?`<div class="chooser-box">${sc.chooserNote}</div>`:'';
   document.getElementById('outcomeArea').innerHTML=`
     <div class="outcome-box ${displayType}">
       <div class="outcome-title">${outcome.title}</div>
       <div>${outcome.text}</div>
       <div class="satir-note">${outcome.satir.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>
     </div>
+    ${insightAfterHtml}${chooserAfterHtml}
     ${sc.fafReveal ? renderFafPanel() : ''}
     <button class="btn-next" onclick="nextScene()">${sc.nextLabel}</button>`;
 }
