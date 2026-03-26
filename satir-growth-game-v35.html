@@ -3262,8 +3262,13 @@ const BONUS_STORIES = {
   },
   love: {
     title:'ความรัก & มิตรภาพ',icon:'💕',
-    intro:'มินนาเริ่มมีความรู้สึกพิเศษกับ "ไท" เพื่อนใหม่ในชมรมศิลปะ แต่กลัวว่าถ้าบอกไปแล้วจะเสียเพื่อนไป',
-    scenes:[
+    intro:'เรื่องราวเกี่ยวกับความรัก ความผูกพัน และการเรียนรู้จากใจ',
+    hasVariants:true,
+    variants:{
+      main:{
+        id:'main',title:'บอกรัก',icon:'💕',
+        intro:'มินนาเริ่มมีความรู้สึกพิเศษกับ "ไท" เพื่อนใหม่ในชมรมศิลปะ แต่กลัวว่าถ้าบอกไปแล้วจะเสียเพื่อนไป',
+        scenes:[
       {
         stage:4, mood:'confused',
         char:{name:'มินนา + ไท',sub:'ความรู้สึกใหม่',id:'minna'},
@@ -3349,6 +3354,9 @@ const BONUS_STORIES = {
         nextLabel:'← กลับเลือกเรื่อง',
       },
     ],
+      },
+      heartbreak:{title:'อกหัก',icon:'💔',intro:'',scenes:[]},
+    },
   },
   drugs: {
     title:'ยาเสพติด & แรงกดดัน',icon:'⚠️',
@@ -3978,7 +3986,7 @@ function toggleLayer(id){
   if(l) l.textContent=`สำรวจแล้ว ${openLayers.size}/${ICEBERG_LAYERS.length} ชั้น`;
 }
 // ══════════════ BONUS STORIES ══════════════
-let bonusMode=null, bonusSceneIdx=0, bonusChosenTypes=[];
+let bonusMode=null, bonusVariant=null, bonusSceneIdx=0, bonusChosenTypes=[];
 function renderBonus(){
   document.getElementById('stageBarWrap').style.display='none';
   document.getElementById('emoBarWrap').style.display='none';
@@ -4005,26 +4013,64 @@ function renderBonus(){
     </div>`;
     document.getElementById('mainArea').innerHTML=html;
   } else {
-    renderBonusScene();
+    const story=BONUS_STORIES[bonusMode];
+    if(story.hasVariants && bonusVariant===null){ renderBonusVariants(); }
+    else { renderBonusScene(); }
   }
 }
 function startBonusStory(key){
   bonusMode=key;
+  bonusVariant=null;
+  bonusSceneIdx=0;
+  bonusChosenTypes=[];
+  const story=BONUS_STORIES[key];
+  if(story.hasVariants){ renderBonusVariants(); }
+  else { renderBonusScene(); }
+}
+function renderBonusVariants(){
+  const story=BONUS_STORIES[bonusMode];
+  let html=`<div class="explorer-wrap">
+    <div class="explorer-header">
+      <h2>${story.icon} ${story.title}</h2>
+      <p>${story.intro}</p>
+    </div>
+    <div style="background:var(--white);border:1.5px solid rgba(139,99,64,0.15);border-top:none;border-radius:0 0 18px 18px;padding:18px 16px">
+      <div class="bonus-story-grid">`;
+  Object.entries(story.variants).forEach(([vkey,v])=>{
+    html+=`<div class="bonus-card" onclick="startBonusVariant('${vkey}')">
+      <div class="bonus-card-icon">${v.icon}</div>
+      <div class="bonus-card-title">${v.title}</div>
+      <div class="bonus-card-desc">${v.intro?v.intro.substring(0,60)+'...':''}</div>
+    </div>`;
+  });
+  html+=`</div>
+      <div style="text-align:center;margin-top:14px">
+        <button class="btn-restart" onclick="bonusMode=null;renderBonus()">← กลับเลือกเรื่อง</button>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('mainArea').innerHTML=html;
+}
+function startBonusVariant(vkey){
+  bonusVariant=vkey;
   bonusSceneIdx=0;
   bonusChosenTypes=[];
   renderBonusScene();
 }
 function renderBonusScene(){
   const story=BONUS_STORIES[bonusMode];
-  const sc=story.scenes[bonusSceneIdx];
+  const scenes=story.hasVariants?story.variants[bonusVariant].scenes:story.scenes;
+  const sc=scenes[bonusSceneIdx];
+  const displayInfo=story.hasVariants?story.variants[bonusVariant]:story;
+  const backFn=story.hasVariants?`bonusVariant=null;renderBonusVariants()`:`bonusMode=null;renderBonus()`;
   renderEmotions(sc.emotions);
   const depathHtml=sc.depathologize?`<div class="depathologize">${sc.depathologize}</div>`:'';
   const copingHtml=sc.copingHint?`<div class="coping-hint">${sc.copingHint}</div>`:'';
   const insightHtml=sc.insightBox?`<div class="insight-box">${sc.insightBox}</div>`:'';
   const chooserHtml=sc.chooserNote?`<div class="chooser-box">${sc.chooserNote}</div>`:'';
   document.getElementById('mainArea').innerHTML=`
-    <button class="bonus-back" onclick="bonusMode=null;renderBonus()">← ${story.icon} ${story.title}</button>
-    <div class="stage-badge">${story.icon} ${story.title} — ฉากที่ ${bonusSceneIdx+1}/${story.scenes.length}</div>
+    <button class="bonus-back" onclick="${backFn}">← ${displayInfo.icon} ${displayInfo.title}</button>
+    <div class="stage-badge">${displayInfo.icon} ${displayInfo.title} — ฉากที่ ${bonusSceneIdx+1}/${scenes.length}</div>
     <div class="scene-card">
       <div class="char-row">
         ${renderCharHTML(sc.char.id||'minna', sc.mood||'happy')}
@@ -4051,7 +4097,8 @@ function renderBonusScene(){
 }
 function chooseBonusOption(idx){
   const story=BONUS_STORIES[bonusMode];
-  const sc=story.scenes[bonusSceneIdx];
+  const scenes=story.hasVariants?story.variants[bonusVariant].scenes:story.scenes;
+  const sc=scenes[bonusSceneIdx];
   const choice=sc.choices[idx];
   const outcome=sc.outcomes[choice.type];
   // Map custom types to CSS classes
@@ -4066,15 +4113,16 @@ function chooseBonusOption(idx){
   bonusChosenTypes.push(cssType);
   const satirMd=outcome.satir.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
   const displayType = outcome.type || cssType;
-  const isLast=bonusSceneIdx>=story.scenes.length-1;
+  const isLast=bonusSceneIdx>=scenes.length-1;
   const nextLabel=sc.nextLabel||'ฉากต่อไป →';
+  const backAction=story.hasVariants?`bonusVariant=null;renderBonusVariants()`:`bonusMode=null;renderBonus()`;
   document.getElementById('bonusOutcomeArea').innerHTML=`
     <div class="outcome-box ${displayType}">
       <div class="outcome-title">${outcome.title}</div>
       <p>${outcome.text}</p>
       <div class="satir-note">${satirMd}</div>
     </div>
-    <button class="btn-next" onclick="${isLast?`bonusMode=null;renderBonus()`:`bonusSceneIdx++;renderBonusScene()`}">${isLast?'← กลับเลือกเรื่อง':nextLabel}</button>`;
+    <button class="btn-next" onclick="${isLast?backAction:`bonusSceneIdx++;renderBonusScene()`}">${isLast?'← กลับเลือกเรื่อง':nextLabel}</button>`;
 }
 // ══════════════ COPING ══════════════
 function renderCoping(){
